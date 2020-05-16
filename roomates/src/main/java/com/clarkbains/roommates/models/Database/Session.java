@@ -1,20 +1,31 @@
-package com.clarkbains.roommates.DatabaseModels;
+package com.clarkbains.roommates.models.Database;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.security.SecureRandom;
 import java.sql.Timestamp;
+import java.util.Base64;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+
+
+    private Integer userId;
+    @Column(columnDefinition = "varchar (300)")
     private String sessionToken;
     private Timestamp createDate;
     private Timestamp expiryDate;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
     public Integer getId() {
         return id;
     }
@@ -45,5 +56,12 @@ public class Session {
 
     public void setExpiryDate(Timestamp expiryDate) {
         this.expiryDate = expiryDate;
+    }
+    static  public String generateToken() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+        String s = Base64.getEncoder().encodeToString(bytes);
+        return s;
     }
 }

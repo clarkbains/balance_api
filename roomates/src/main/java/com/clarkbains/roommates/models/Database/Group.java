@@ -1,9 +1,12 @@
-package com.clarkbains.roommates.DatabaseModels;
+package com.clarkbains.roommates.models.Database;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity // This tells Hibernate to make a table out of this class
 @javax.persistence.Table(name = "`group`")
@@ -13,8 +16,9 @@ public class Group {
     private Integer id;
     private String group_name;
     private String address;
-    private boolean archived;
     private Integer owner;
+    @JsonIgnore
+    private boolean archived;
 
     public Integer getId() {
         return id;

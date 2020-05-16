@@ -1,4 +1,4 @@
-package com.clarkbains.roommates.DatabaseModels;
+package com.clarkbains.roommates.models.Database;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
