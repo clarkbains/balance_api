@@ -26,4 +26,9 @@ public class AddUserToGroupRequest extends AuthenticatedRequest {
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
+
+    public AddUserToGroupRequest(@Valid Integer[] ids, @Valid Integer groupId) {
+        this.ids = ids;
+        this.groupId = groupId;
+    }
 }

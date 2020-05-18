@@ -28,13 +28,9 @@ public class GroupsController extends Main{
         g.setOwner(u.getId());
         Group ret = groupsRepository.save(g);
         if (req.getAddSelf()){
-            AddUserToGroupRequest addReq = new AddUserToGroupRequest();
-            addReq.setGroupId(ret.getId());
-            addReq.getAuthFromReq(req);
-            Integer[] a = new Integer[1];
-            a[0] = u.getId();
-            addReq.setIds(a);
-            addmemberToGroup(addReq);
+            Integer[] a = {u.getId()};
+            AddUserToGroupRequest addReq = new AddUserToGroupRequest(a, ret.getId());
+            addMemberToGroup(addReq);
         }
         return ret;
     }
@@ -57,8 +53,8 @@ public class GroupsController extends Main{
             return resp;
         }
     @PostMapping(path = "/member")
-    void addmemberToGroup(@Valid @RequestBody AddUserToGroupRequest req) throws NotAuthenticatedException {
-        User u = getRequestor(req);
+    void addMemberToGroup(@Valid @RequestBody AddUserToGroupRequest req) throws NotAuthenticatedException {
+        getRequestor(req);
         ArrayList<UserGroupMember> correlations = new ArrayList<>();
         for (Integer member: req.getIds()){
             UserGroupMember o = new UserGroupMember();
