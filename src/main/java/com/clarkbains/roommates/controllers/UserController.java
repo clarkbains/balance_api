@@ -57,18 +57,18 @@ public class UserController extends Main{
     @GetMapping(path = "")
     public @ResponseBody
     UserResponse getUser (@Valid @RequestBody AuthenticatedRequest req) throws NotAuthenticatedException {
-        UserResponse u = (UserResponse) getRequestor(req);
+        UserResponse u = new UserResponse(getRequestor(req));
         return u;
     }
 
     @GetMapping(path = "/public")
     public @ResponseBody
     ResourceResponse<PublicUserResponse> getPublicUser (@Valid @RequestBody GetPublicUserRequest req) throws NotFoundException {
-        PublicUserResponse u = (PublicUserResponse) usersRepository.findFirstByIdEquals(req.getId());
+        User u = usersRepository.findFirstByIdEquals(req.getId());
         if (u == null){
             throw new NotFoundException();
         }
-        return new ResourceResponse<>(u);
+        return new ResourceResponse<>(PublicUserResponse.fromDatabaseEntity(u));
 
     }
 

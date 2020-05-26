@@ -3,23 +3,16 @@ package com.clarkbains.roommates.models.Response.Successes.User.Public;
 import com.clarkbains.roommates.models.Database.User;
 import com.clarkbains.roommates.models.Response.Successes.Generic.SuccessResponse;
 
-public class PublicUserResponse extends User {
-    private String name;
-    private Integer id;
+public class PublicUserResponse{
+    public String name;
+    public Integer id;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public PublicUserResponse(String name, Integer id) {
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public static PublicUserResponse fromDatabaseEntity(User u){
+        return new PublicUserResponse(u.getName(), u.getId());
     }
 }

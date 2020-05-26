@@ -25,14 +25,12 @@ import java.sql.Timestamp;
 @RestController // This means that this class is a Controller
 public class Main{
     ObjectMapper objectMapper;
-    @Autowired
-    protected GroupsRepository groupsRepository;
-    @Autowired
-    protected SessionsRepository sessionsRepository;
-    @Autowired
-    protected UserGroupMembersRepository userGroupMembersRepository;
-    @Autowired
-    protected UsersRepository usersRepository;
+    @Autowired protected GroupsRepository groupsRepository;
+    @Autowired protected SessionsRepository sessionsRepository;
+    @Autowired protected UserGroupMembersRepository userGroupMembersRepository;
+    @Autowired protected UsersRepository usersRepository;
+    @Autowired protected IndividualTransactionsRepository individualTransactionsRepository;
+    @Autowired protected TransactionsRepository transactionsRepository;
 
     public  Main(){
          objectMapper = new ObjectMapper();

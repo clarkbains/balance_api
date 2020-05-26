@@ -3,11 +3,12 @@ package com.clarkbains.roommates.models.Request.Groups.Member;
 import com.clarkbains.roommates.models.Request.AuthenticatedRequest;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 public class AddUserToGroupRequest extends AuthenticatedRequest {
-    @Valid
+    @NotNull
     private Integer[] ids;
-    @Valid
+    @NotNull
     private Integer groupId;
 
 
